@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-main>
+      <!--      <HelloWorld/>-->
+      <div style="max-width: 1000px;margin-left: 200px">
+        <posts-view/>
+        <v-btn style="align-content: center" @click="openDialog">
+          Create new post
+        </v-btn>
+      </div>
+      <add-post
+          :currentUser="username"
+          ref="addPostDialog"
+      ></add-post>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PostsView from "/Users/demeanvlad8/Desktop/SCD_SocialMediaApp_final/frontend/src/components/PostView.vue";  
+import AddPost from "@/components/AddPost.vue";
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
+    PostsView,
+    AddPost
+  },
+
+  data: () => ({
+    username: "Nume utilizator"
+  }),
+  methods: {
+    openDialog() {
+      this.$refs.addPostDialog.showDialog = true
+    }
   }
+
+
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
