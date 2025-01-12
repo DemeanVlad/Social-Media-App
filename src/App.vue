@@ -1,42 +1,52 @@
 <template>
-  <v-app>
-    <v-main>
-      <!--      <HelloWorld/>-->
-      <div style="max-width: 1000px;margin-left: 200px">
-        <posts-view/>
-        <v-btn style="align-content: center" @click="openDialog">
-          Create new post
-        </v-btn>
-      </div>
-      <add-post
-          :currentUser="username"
-          ref="addPostDialog"
-      ></add-post>
-    </v-main>
-  </v-app>
+  <div id="app">
+    <!-- PostForm component to create new posts -->
+    
+    
+    <!-- PostList component to display the posts -->
+    <PostList :posts="posts" />
+    <PostForm @post-added="fetchPosts" />
+  </div>
 </template>
 
 <script>
-import PostsView from "/Users/demeanvlad8/Desktop/SCD_SocialMediaApp_final/frontend/src/components/PostView.vue";  
-import AddPost from "@/components/AddPost.vue";
+import PostForm from './components/PostForm.vue';
+import PostList from './components/PostList.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
-
   components: {
-    PostsView,
-    AddPost
+    PostForm,
+    PostList
   },
-
-  data: () => ({
-    username: "Nume utilizator"
-  }),
+  data() {
+    return {
+      posts: []  // This will store the list of posts
+    };
+  },
   methods: {
-    openDialog() {
-      this.$refs.addPostDialog.showDialog = true
+    async fetchPosts() {
+      try {
+        // Fetch the posts from the backend
+        const response = await axios.get('http://localhost:8082/post');
+        this.posts = response.data;  // Update posts data
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
     }
+  },
+  created() {
+    // Fetch posts when the app is created
+    this.fetchPosts();
   }
-
-
-}
+};
 </script>
+
+<style>
+#app {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+  padding: 20px;
+}
+</style>
