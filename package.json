@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -47,6 +48,15 @@
   "description": "## Project setup ``` npm install ```",
   "main": "babel.config.js",
   "keywords": [],
+=======
+  "name": "scd_socialmediaapp_final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+>>>>>>> 425a823 (frontend update)
   "author": "",
   "license": "ISC"
 }
